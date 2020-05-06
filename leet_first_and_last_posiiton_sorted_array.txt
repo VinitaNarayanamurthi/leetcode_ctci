@@ -1,0 +1,52 @@
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) 
+    {        
+         int n = nums.size(); 
+         int  ans1 =  startindex(nums, target );
+         int ans2 =  endindex(nums, target);  
+         return {ans1, ans2};
+    }
+    
+    int startindex(vector<int>& nums, int target) 
+    {
+        int result = -1;
+        int n = nums.size();
+        int low =0; int high = n-1;
+        
+        while(low <= high)
+        {
+            int mid = (low + high)/2;
+            cout << "start method mid value " << mid << endl;
+           
+            if (nums[mid]>= target) high = mid-1;  // highshd move to left 
+            else low = mid+1;
+            
+             if(nums[mid] == target) result = mid;
+            
+        }
+         
+        return result;
+    }
+    
+    int endindex(vector<int>& nums, int target)
+    {
+        int result = -1;
+        int n = nums.size();
+        int low =0; int high = n-1;
+         while(low <= high)
+         {
+            int mid = (low + high)/2;
+             cout << "end methid mid value " << mid << endl;
+           
+            if (nums[mid] <= target) low = mid+1;  // low shd move to right
+            else high = mid-1;
+             
+              if(nums[mid] == target) result = mid;
+            
+        }
+        
+        return result;
+        
+    }
+};

@@ -1,0 +1,84 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        
+        if(root == NULL)
+        {
+             return {};
+        }
+        vector<int> v1;
+        vector<vector<int>> v2;
+        queue<TreeNode*> work_q, child_q;
+        work_q.push(root); 
+        int row_num =1;
+        // cout << "work q value" << work_q.front()->left->val<< endl;
+        
+        while(!work_q.empty() || !child_q.empty())
+            
+        {
+        
+        while(!work_q.empty())
+            
+            
+        {
+            
+            if(work_q.front()->left != NULL)
+            {
+                child_q.push(work_q.front()->left);
+             }
+            
+            if(work_q.front()->right!= NULL)
+            {
+                child_q.push(work_q.front()->right);
+             }
+             
+            v1.push_back(work_q.front()->val);
+            
+            cout << "row number" << row_num << endl;
+            
+            for(auto i =0; i< v1.size(); i++)
+            {
+                cout << v1.at(i) << endl;
+            }
+            
+            
+            
+            work_q.pop();
+                
+        }
+            
+        if (row_num  % 2 ==0)
+            {
+                reverse(v1.begin(), v1.end());
+            }
+            
+        v2.push_back(v1);
+        v1.clear();
+     
+        
+        while(!child_q.empty())
+        {
+            work_q.push(child_q.front());
+            child_q.pop();
+        }
+        
+             row_num +=1;
+        }
+        
+       
+        
+        return v2;
+    
+        
+        
+    }
+};

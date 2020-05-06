@@ -1,0 +1,81 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        
+        vector<int> parent_p, parent_q;
+        bool a, b;
+       a =  in_helper(root, p, parent_p);
+        
+       b =  in_helper(root, q, parent_q);
+        
+        cout <<" hi" <<parent_p.size() << endl;
+       int c = parent_p.size();
+        int d = parent_q.size();
+        cout <<parent_p[c-1] << endl;
+        
+        
+        for(auto i = c-1; i>=0; i--)
+        {
+            for(auto j = d-1; j>=0; j--)
+             { 
+                // cout << "Hi" << endl;
+             int   count = 1;
+                if(parent_p[i] == parent_q[j] && count == 1)
+                {cout << "final ans"<< parent_p[i] << endl;
+                count ++;}
+            }
+        }
+            
+        
+        return root;
+    }
+    
+    bool in_helper(TreeNode* root, TreeNode*p, vector<int>& par)
+    {
+        bool res = false;
+        if(root == NULL)
+        {
+            res = false;
+            return res;
+        }
+        
+        else
+        {
+            par.push_back(root->val);
+            // cout << "pushed" << root->val << endl;
+            res = in_helper(root->left, p, par);
+                
+            if(res == true)
+                
+            { 
+                
+                return res;
+            }
+            if(root == p)
+            {
+                res = true;
+                return res;
+            }
+           
+             
+           
+            res = in_helper(root->right, p, par);
+            if (res){
+                return res; 
+            }
+            // cout << "pop" << par.back() << endl;
+            par.pop_back();
+            return res;
+        }
+        
+    }
+};

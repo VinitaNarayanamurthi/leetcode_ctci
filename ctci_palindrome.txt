@@ -1,0 +1,41 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isPalindrome(ListNode* head)
+    {
+        ListNode * p = head;
+        return check(head, p);
+    }
+    
+    bool check(ListNode* & head, ListNode*p)
+        
+    {
+        if(p == NULL)
+        {
+            return true;
+        }
+         // In order to traverse to the last node we do 
+        //recusrion
+        bool isPal = check(head, p->next);
+        
+        if(head->val != p->val)
+        {  
+            return false;
+        }
+        
+        head = head->next;
+        
+        return isPal;
+    
+    }
+    
+        
+    
+};
